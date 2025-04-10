@@ -1,5 +1,6 @@
 import sys
 def determine_tokens(line, token_list):
+    ''' Time Complexity: O(n)'''
     previous_word = ''
     for char in line:
         if not char.isalnum() and previous_word != '':
@@ -10,6 +11,8 @@ def determine_tokens(line, token_list):
         previous_word += char
 
 def tokenize(textFilePath):
+    '''Time Complexity: O(m * n) with O(m) calls, where m is number of lines,
+    to function determine_tokens which is O(n) where n is chars in the line'''
     token_list = []
     with open(textFilePath) as file:
         for line in file.readlines():
@@ -17,6 +20,7 @@ def tokenize(textFilePath):
     return token_list
 
 def computeWordFrequencies(token_list):
+    '''Time Complexity: O(n)'''
     token_dict = {}
     for token in token_list:
         if token in token_dict.keys():
@@ -26,15 +30,17 @@ def computeWordFrequencies(token_list):
     return token_dict
 
 def compare(entry):
+    '''Time complexity: O(1)'''
     return entry[1]
 
 def print_map(map):
+    '''Time Complexity: O(nlogn)'''
     results = sorted(map.items(), key = compare, reverse = True)
     for entry in results:
         print(entry[0], entry[1])
-#Finally, write a method that prints out the word frequency count onto the screen. The print out should be ordered by decreasing frequency (so, the highest frequency words first).
 
 if __name__ == "__main__":
+    '''Total time complexity is O(m * n + n log n)'''
     if len(sys.argv) > 1:
         token_list = tokenize(sys.argv[1])
         map = computeWordFrequencies(token_list)
