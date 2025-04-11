@@ -3,12 +3,12 @@ def determine_tokens(line, token_list):
     ''' Time Complexity: O(n)'''
     previous_word = ''
     for char in line:
-        if not char.isalnum() and previous_word != '':
+        if char.isalnum():
+            previous_word += char
+        elif previous_word != '':
             token_list.append(previous_word.lower())
             previous_word = ''
             continue
-
-        previous_word += char
 
 def tokenize(textFilePath):
     '''Time Complexity: O(m * n) with O(m) calls, where m is number of lines,
@@ -20,27 +20,18 @@ def tokenize(textFilePath):
     return token_list
 
 def computeWordFrequencies(token_list):
-    '''Time Complexity: O(n)'''
+    '''Time Complexity: O(n) where n is number of tokens'''
     token_dict = {}
     for token in token_list:
-        if token in token_dict.keys():
+        if token_dict.get(token, False):
             token_dict[token] = token_dict[token] + 1
         else:
             token_dict[token] = 1
     return token_dict
 
-def compare(entry):
-    '''Time complexity: O(1)'''
-    return entry[1]
-
-def print_map(map):
-    '''Time Complexity: O(nlogn)'''
-    results = sorted(map.items(), key = compare, reverse = True)
-    for entry in results:
-        print(entry[0], entry[1])
 
 def compare_mapping(map1, map2):
-    '''Time complexity: O(n)'''
+    '''Time complexity: O(n) where n is the number of distinct tokens in map1'''
     map_items_1 = map1.items()
     count = 0
     for entry in map_items_1:
@@ -51,7 +42,7 @@ def compare_mapping(map1, map2):
 
 
 if __name__ == "__main__":
-    '''Total time complexity is O(m * n + n log n)'''
+    '''Total time complexity is O(m * n)'''
     if len(sys.argv) > 2:
         token_list_1 = tokenize(sys.argv[1])
         map1 = computeWordFrequencies(token_list_1)
