@@ -48,8 +48,8 @@ if __name__ == "__main__":
              -n is number of chars
              -h is distinct tokens
              -r is number of tokens (not part of term, but included here for reference)
-     The term O(r) is not added to the average cost since it is linear and thus does not
-     dominate the expression. 
+     The term O(r) that comes about from computeWordFrequencies is not added to the average cost 
+     since it is linear and thus is not a dominate term in the expression. 
         
      Worst Case scenario: O(m * n + h log h + r^2)
              -m is number of lines
