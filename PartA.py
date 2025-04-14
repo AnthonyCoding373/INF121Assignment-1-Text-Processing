@@ -20,7 +20,7 @@ def tokenize(textFilePath):
     return token_list
 
 def computeWordFrequencies(token_list):
-    '''Time Complexity: O(n) where n is number of tokens'''
+    '''Time Complexity: O(n^2) where n is number of tokens'''
     token_dict = {}
     for token in token_list:
         if token_dict.get(token, False):
