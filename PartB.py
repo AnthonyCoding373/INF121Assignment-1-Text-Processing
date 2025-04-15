@@ -1,4 +1,5 @@
 import sys
+
 def determine_tokens(line, token_set):
     ''' Time Complexity
     Average case: O(n)
