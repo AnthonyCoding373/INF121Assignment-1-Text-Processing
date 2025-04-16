@@ -1,6 +1,10 @@
 import sys
+
+
+''' 
+For function determine_tokens
+Time Complexity: O(n)'''
 def determine_tokens(line, token_list):
-    ''' Time Complexity: O(n)'''
     previous_word = ''
     for char in line:
         if char.isalnum() and char.isascii():
@@ -10,19 +14,24 @@ def determine_tokens(line, token_list):
             previous_word = ''
             continue
 
+'''
+For function tokenize()
+Time Complexity: O(m * n) with O(m) calls, where m is number of lines,
+to function determine_tokens which is O(n) where n is number of chars in the line'''
 def tokenize(textFilePath):
-    '''Time Complexity: O(m * n) with O(m) calls, where m is number of lines,
-    to function determine_tokens which is O(n) where n is number of chars in the line'''
     token_list = []
     with open(textFilePath, 'r', encoding = 'utf-8') as file:
         for line in file.readlines():
             determine_tokens(line, token_list)
     return token_list
 
+
+'''
+For function computeWordFrequencies
+Time Complexity
+O(n) on average but can degrade to O(n^2) where n is number of tokens
+if many collisions occur'''
 def computeWordFrequencies(token_list):
-    '''Time Complexity
-    O(n) on average but can degrade to O(n^2) where n is number of tokens
-    if many collisions occur'''
     token_dict = {}
     for token in token_list:
         if token_dict.get(token, False):
@@ -31,12 +40,18 @@ def computeWordFrequencies(token_list):
             token_dict[token] = 1
     return token_dict
 
+
+'''
+For function compare
+Time complexity: O(1)'''
 def compare(entry):
-    '''Time complexity: O(1)'''
     return entry[1]
 
+
+'''
+For function print_map
+Time Complexity: O(nlogn)'''
 def print_map(map):
-    '''Time Complexity: O(nlogn)'''
     results = sorted(map.items(), key = compare, reverse = True)
     for entry in results:
         print(entry[0], entry[1])

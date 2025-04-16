@@ -1,17 +1,19 @@
 import sys
 
+
+''' 
+For function determine_tokens
+Time Complexity:
+Average case: O(n)
+    - n is number of chars
+
+Worst case: O(n * h)
+    - n is number of chars
+    - h is number of words.
+
+The worst case scenario only occurs when a collision in the set occurs
+which can cause O(h) for adding'''
 def determine_tokens(line, token_set):
-    ''' Time Complexity
-    Average case: O(n)
-        - n is number of chars
-
-    Worst case: O(n * h)
-        - n is number of chars
-        - h is number of words.
-
-    The worst case scenario only occurs when a collision in the set occurs
-    which can cause O(h) for adding'''
-
     previous_word = ''
     for char in line:
         if char.isalnum() and char.isascii():
@@ -21,19 +23,18 @@ def determine_tokens(line, token_set):
             previous_word = ''
             continue
 
+'''
+For function tokenize
+Time Complexity:
+average case: O(m * n)
+    - m is number of lines
+    - n is number of chars in each line
+
+worst case: O(m * n * h)
+    - m is number of lines
+    - n is number of chars in each line
+    - h is number of tokens and only contributes when collisions when adding to the set occurs'''
 def tokenize(textFilePath):
-    '''
-    Time Complexity:
-
-    average case: O(m * n)
-        - m is number of lines
-        - n is number of chars in each line
-
-    worst case: O(m * n * h)
-        - m is number of lines
-        - n is number of chars in each line
-        - h is number of tokens and only contributes when collisions when adding to the set occurs
-    '''
     token_set = set()
     with open(textFilePath, 'r', encoding = 'utf-8') as file:
         for line in file.readlines():
@@ -41,11 +42,13 @@ def tokenize(textFilePath):
     return token_set
 
 
+'''
+For function compare_mapping
+Time complexity: O(min(n, m))
+n is the number of elements in token_set1
+m is the number of elements in token_set2
+'''
 def compare_mapping(token_set1, token_set2):
-    '''Time complexity: O(min(n, m))
-    n is the number of elements in token_set1
-    m is the number of elements in token_set2
-    '''
     set3 = token_set1.intersection(token_set2)
     return len(set3)
 
